@@ -12,21 +12,21 @@ cloudinary.config({
 
 
 const uploadOnCloudinary = async(localFilePath) =>{
-    try{
-      if  (!localFilePath) return null;
-      // upload file on cloudinary
-      cloudinary.uploader.upload(localFilePath,{
-        resource_type:"auto"
-      })
-      // file uploaded successfully
-      console.log("file uploaded on cloudinary",response.url)
-      return response
-
-    }catch(error){
-         // if file not uploaded on cloudinary then it will be stored in the server, so remove those malicius file from server
-         fs.unlinkSync(localFilePath)
-         return null
-    }
+  try {
+    if (!localFilePath) return null;
+    // upload file on cloudinary
+    //upload the file on cloudinary
+    const response = await cloudinary.uploader.upload(localFilePath, {
+      resource_type: "auto",
+    });
+    // file uploaded successfully
+    fs.unlinkSync(localFilePath);
+    return response;
+  } catch (error) {
+    // if file not uploaded on cloudinary then it will be stored in the server, so remove those malicius file from server
+    fs.unlinkSync(localFilePath);
+    return null;
+  }
 }
 
 export {uploadOnCloudinary}
