@@ -5,6 +5,9 @@ import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const generateAccessAndRefreshTokens = async (userId) => {
   // find user
@@ -252,7 +255,7 @@ const changeCurrentUserPassword = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .json(ApiResponse(200, {}, "Password changed successfully"));
+    .json(new ApiResponse(200, {}, "Password changed successfully"));
 });
 
 const getCurrentUser = asyncHandler(async (req, res) => {
@@ -282,7 +285,7 @@ const updateAccountDetails = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .json(ApiResponse(200, user, "User details updated successfully"));
+    .json(new ApiResponse(200, user, "User details updated successfully"));
 });
 
 // update file controller
@@ -311,7 +314,7 @@ const updateUserAvatar = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .json(ApiResponse(200, {}, "Avatar updated successfully"));
+    .json(new ApiResponse(200, {}, "Avatar updated successfully"));
 });
 
 const updateUserCoverImage = asyncHandler(async (req, res) => {
@@ -336,7 +339,7 @@ const updateUserCoverImage = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .json(ApiResponse(200, {}, "CoverImage updated successfully"));
+    .json(new ApiResponse(200, {}, "CoverImage updated successfully"));
 });
 
 const getUserChannelProfile = asyncHandler(async (req, res) => {
